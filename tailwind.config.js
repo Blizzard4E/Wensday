@@ -17,11 +17,12 @@ module.exports = {
         },
         extend: {
             colors: {
-                crimson: "#d7263dff",
-                "oxford-blue": "#02182bff",
-                "brandeis-blue": "#256effff",
-                seasalt: "#faf9f9ff",
-                moonstone: "#43bccdff",
+                "light-mint": "#21C8B5",
+                "dark-mint": "#1b998bff",
+                light: "#F1F1F1",
+                "dark-blue": "#212438",
+                "dark-lightblue": "#30344C",
+                bittersweet: "#FF3E41",
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
                 ring: "hsl(var(--ring))",

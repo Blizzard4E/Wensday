@@ -7,8 +7,8 @@ export function middleware(request: NextRequest) {
     if (request.nextUrl.pathname == "/") {
         return NextResponse.next();
     }
-    let accessToken = request.cookies.get("accessToken");
-    if (accessToken) {
+    let refreshToken = request.cookies.get("refreshToken");
+    if (refreshToken) {
         return NextResponse.next();
     }
     return NextResponse.redirect(new URL("/", request.url));

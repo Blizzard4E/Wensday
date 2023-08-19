@@ -85,28 +85,34 @@ export async function GET(req: Request) {
         });
         return response;
     } else if (refreshToken) {
-        const tokenCookie = await getAccessToken(refreshToken.value).catch(
-            (err) => {
-                console.log(err);
-            }
-        );
-        if (tokenCookie) {
-            let userData = jwt_decode(tokenCookie[0].value);
-            response = NextResponse.json({
-                status: 200,
-                message: "Authorized Access",
-                userData: userData,
-            });
-            tokenCookie.forEach((cookie) => {
-                console.log(cookie);
-                response.cookies.set(cookie.name, cookie.value, cookie);
-            });
-        } else {
-            response = NextResponse.json({
-                status: 401,
-                message: "UnAuthorized Access",
-            });
-        }
+        // const tokenCookie = await getAccessToken(refreshToken.value).catch(
+        //     (err) => {
+        //         console.log(err);
+        //     }
+        // );
+        // if (tokenCookie) {
+        //     let userData = jwt_decode(tokenCookie[0].value);
+        //     response = NextResponse.json({
+        //         status: 200,
+        //         message: "Authorized Access",
+        //         userData: userData,
+        //     });
+        //     tokenCookie.forEach((cookie) => {
+        //         console.log(cookie);
+        //         response.cookies.set(cookie.name, cookie.value, cookie);
+        //     });
+        // } else {
+        //     response = NextResponse.json({
+        //         status: 401,
+        //         message: "UnAuthorized Access",
+        //     });
+        // }
+        let userData = jwt_decode(refreshToken.value);
+        response = NextResponse.json({
+            status: 200,
+            message: "Authorized Access",
+            userData: userData,
+        });
         return response;
     } else {
         response = NextResponse.json({
