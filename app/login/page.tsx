@@ -31,7 +31,7 @@ async function loginAPI(email: string, password: string) {
     return new Promise<Cookie[]>((resolve, reject) => {
         let cookiesJson: Cookie[] = [];
         console.log(email);
-        fetch("https://wensday.cyclic.app/api/user/login", {
+        fetch("https://wensday.cyclic.app/api/public/user/login", {
             method: "POST",
             credentials: "include",
             mode: "no-cors",

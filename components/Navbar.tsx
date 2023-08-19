@@ -44,7 +44,7 @@ export default function Navbar() {
                         <Link href="/createProject">Create Project</Link>
                     </div>
                 ) : (
-                    <div className="col-start-5 col-span-4 grid grid-cols-4 gap-8 place-items-center">
+                    <div className="col-start-5 col-span-4 flex items-center gap-8 text-light text-sm">
                         <Link href="/">Home</Link>
                         <Link href="/projects">All Projects</Link>
                         <Link href="/about">About Us</Link>
