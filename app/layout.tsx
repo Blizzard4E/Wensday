@@ -1,12 +1,8 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Oxygen } from "next/font/google";
-import { useUserStore } from "@/store";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import UserDetection from "@/components/UserDetection";
 
 const inter = Inter({ subsets: ["latin"] });
 const oxygen = Oxygen({
@@ -26,37 +22,10 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const pathname = usePathname();
-    const { isUser, userInfo, setIsUser, removeUser } = useUserStore();
-    useEffect(() => {
-        console.log(userInfo);
-        fetch("../api/user", {
-            credentials: "include",
-            mode: "no-cors",
-            cache: "no-store",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.status == 200) {
-                    setIsUser(true, {
-                        id: data.userData.user_id,
-                        name: data.userData.name,
-                        profile: data.userData.profile,
-                        email: data.userData.email,
-                    });
-                } else {
-                    setIsUser(false, {
-                        id: null,
-                        name: null,
-                        profile: null,
-                        email: null,
-                    });
-                }
-            });
-    }, [isUser, pathname]);
     return (
         <html lang="en" className="bg-light">
             <body className={oxygen.className}>
+                <UserDetection />
                 <div className="grid grid-cols-12">
                     <div className="col-span-12">
                         <Navbar />

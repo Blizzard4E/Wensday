@@ -1,3 +1,4 @@
+"use client";
 import { useUserStore } from "@/store";
 import Link from "next/link";
 import { Jomhuria } from "next/font/google";
