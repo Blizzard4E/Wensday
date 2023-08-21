@@ -28,49 +28,6 @@ function extractCookies(cookies: any[]): Cookie[] {
     });
 }
 
-function getAccessToken(refreshToken: string) {
-    return new Promise<Cookie[]>((resolve, reject) => {
-        let cookiesJson: Cookie[] = [];
-        fetch("https://wensday.cyclic.app/api/requestAccessToken", {
-            credentials: "include",
-            mode: "no-cors",
-            cache: "no-store",
-            headers: {
-                Cookie: "refreshToken=" + refreshToken,
-            },
-        })
-            .then(async (res) => {
-                const data = await res.json();
-                console.log(data);
-                if (data.status == 200) {
-                    //* Cookies Extractor
-                    let cookieString: string | null =
-                        res.headers.get("set-cookie");
-                    let cookies: Cookie[] = [];
-                    //* Turns the cookie string into array of cookies
-                    if (cookieString) {
-                        let cookieStringArray: string[] = cookieString?.split(
-                            /,(?=\s*[a-zA-Z0-9_\-]+=)/
-                        );
-                        cookieStringArray.forEach((cookieString) => {
-                            let cookieParsed = cookieParse.parse(cookieString);
-                            cookies.push(cookieParsed);
-                        });
-                    }
-                    //* Format the cookies correctly to use
-                    cookiesJson = extractCookies(cookies);
-                    //console.log(cookiesJson);
-                    resolve(cookiesJson);
-                } else {
-                    reject(data);
-                }
-            })
-            .catch((err) => {
-                reject(err);
-            });
-    });
-}
-
 export async function GET(req: Request) {
     const cookieStore = cookies();
     const refreshToken = cookieStore.get("refreshToken");

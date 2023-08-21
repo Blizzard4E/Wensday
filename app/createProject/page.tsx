@@ -4,12 +4,6 @@ import { RefObject, use, useRef, useState } from "react";
 import { Fira_Code } from "next/font/google";
 import TextareaAutosize from "react-textarea-autosize";
 
-interface BlogComponent {
-    type: number;
-    text?: string;
-    text2?: string;
-}
-
 export default function CreateProject() {
     const imageRef = useRef<HTMLInputElement>(null);
     const nameRef = useRef<HTMLInputElement>(null);
@@ -55,6 +49,18 @@ export default function CreateProject() {
                                 credentials: "include",
                                 mode: "no-cors",
                                 cache: "no-store",
+                                body: JSON.stringify({
+                                    name: nameRef.current?.value,
+                                    description: descRef.current?.value,
+                                    year: 2023,
+                                    components: [],
+                                    user_id: "1",
+                                    members: ["1"],
+                                    logo: imageURL,
+                                }),
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
                             }).then(async (res) => {
                                 const data = await res.json();
                                 console.log(data);
@@ -68,7 +74,7 @@ export default function CreateProject() {
 
     return (
         <div className="relative col-span-10 grid grid-cols-10">
-            <form className="col-span-8 grid w-full" action={createProject}>
+            <div className="col-span-8 grid w-full">
                 <div className="flex gap-x-4">
                     <div>
                         <h1 className="font-bold text-lg text-center">Logo</h1>
@@ -114,7 +120,7 @@ export default function CreateProject() {
                         Create
                     </button>
                 </div>
-            </form>
+            </div>
             <section className="col-span-2"></section>
         </div>
     );

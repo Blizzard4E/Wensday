@@ -30,7 +30,7 @@ export default function RootLayout({
     const { isUser, userInfo, setIsUser, removeUser } = useUserStore();
     useEffect(() => {
         console.log(userInfo);
-        fetch("api/user", {
+        fetch("../api/user", {
             credentials: "include",
             mode: "no-cors",
             cache: "no-store",
@@ -39,12 +39,14 @@ export default function RootLayout({
             .then((data) => {
                 if (data.status == 200) {
                     setIsUser(true, {
+                        id: data.userData.user_id,
                         name: data.userData.name,
                         profile: data.userData.profile,
                         email: data.userData.email,
                     });
                 } else {
                     setIsUser(false, {
+                        id: null,
                         name: null,
                         profile: null,
                         email: null,

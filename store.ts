@@ -5,6 +5,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 interface UserState {
     isUser: boolean;
     userInfo: {
+        id: String | null;
         name: String | null;
         profile: String | null;
         email: String | null;
@@ -12,6 +13,7 @@ interface UserState {
     setIsUser: (
         isUser: boolean,
         userInfo: {
+            id: String | null;
             name: String | null;
             profile: String | null;
             email: String | null;
@@ -23,6 +25,7 @@ interface UserState {
 export const useUserStore = create<UserState>()((set) => ({
     isUser: false,
     userInfo: {
+        id: null,
         name: null,
         profile: null,
         email: null,
@@ -30,6 +33,7 @@ export const useUserStore = create<UserState>()((set) => ({
     setIsUser: (
         isUser: boolean,
         userInfo: {
+            id: String | null;
             name: String | null;
             profile: String | null;
             email: String | null;
@@ -42,6 +46,7 @@ export const useUserStore = create<UserState>()((set) => ({
         set({
             isUser: false,
             userInfo: {
+                id: null,
                 name: null,
                 profile: null,
                 email: null,
